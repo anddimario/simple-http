@@ -33,7 +33,7 @@ func main() {
 	http.HandleFunc("/up", upHandler)
 	http.HandleFunc("/", helloHandler(host))
 
-	port := os.Getenv("PORT")
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
 
 	panic(http.ListenAndServe(port, nil))
 }
