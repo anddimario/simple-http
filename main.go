@@ -17,7 +17,7 @@ func helloHandler(host string) http.HandlerFunc {
 		slog.Info("Request", "host", host, "request_id", r.Header.Get("X-Request-ID"), "method", r.Method, "url", r.URL)
 
 		w.Header().Add("Content-Type", "text/html")
-		fmt.Fprintf(w, "<body>Hello from <strong>%s</strong> at <strong>%s</strong></body>\n",
+		fmt.Fprintf(w, "<body>V2 - Hello from <strong>%s</strong> at <strong>%s</strong></body>\n",
 			host,
 			time.Now().Format(time.RFC3339),
 		)
@@ -34,6 +34,7 @@ func main() {
 	http.HandleFunc("/", helloHandler(host))
 
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	slog.Info(port)
 
 	panic(http.ListenAndServe(port, nil))
 }
